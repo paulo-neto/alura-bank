@@ -1,32 +1,31 @@
-class NegociacaoController{
+class NegociacaoController {
 
-    private inputData: HTMLInputElement;
-    private inputQuantidade: HTMLInputElement;
-    private inputValor: HTMLInputElement;
-    private negociacoes: Negociacoes;
-    private negociacoesView: NegociacoesView;
-    private mensagemView: MensagemView;
+    private inputData: JQuery;
+    private inputQuantidade: JQuery;
+    private inputValor: JQuery;
+    private negociacoes = new Negociacoes();
+    private negociacoesView = new NegociacoesView('#negociacoesView');
+    private mensagemView = new MensagemView('#mensagemView');
 
-    constructor(){
-        this.inputData = <HTMLInputElement>document.querySelector('#data');
-        this.inputQuantidade = <HTMLInputElement>document.querySelector('#quantidade');
-        this.inputValor = <HTMLInputElement>document.querySelector('#valor');
-        this.negociacoes = new Negociacoes();
-        this.negociacoesView = new NegociacoesView('#negociacoesView');
-        this.mensagemView = new MensagemView('#mensagemView');
-        // atualiza a view para exibir os dados do modelo, vazio
+    constructor() {
+        this.inputData = $('#data');
+        this.inputQuantidade = $('#quantidade');
+        this.inputValor = $('#valor');
         this.negociacoesView.update(this.negociacoes);
     }
 
-    adiciona(event: Event): void{
+    adiciona(event: Event) {
+
         event.preventDefault();
+
         const negociacao = new Negociacao(
-            new Date(this.inputData.value.replace(/-/g,',')),
-            parseInt(this.inputQuantidade.value),
-            parseFloat(this.inputValor.value)
+            new Date(this.inputData.val().replace(/-/g, ',')), 
+            parseInt(this.inputQuantidade.val()),
+            parseFloat(this.inputValor.val())
         );
+
         this.negociacoes.adiciona(negociacao);
-        // depois de adicionar, atualiza a view novamente para refletir os dados
+
         this.negociacoesView.update(this.negociacoes);
         this.mensagemView.update('Negociação adicionada com sucesso!');
     }

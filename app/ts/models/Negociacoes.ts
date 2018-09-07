@@ -1,12 +1,12 @@
 class Negociacoes {
-    
-    private _negociacoes: Array<Negociacao> = [];//ou Negociacao[]
 
-    adiciona(negociacao: Negociacao){
-        this._negociacoes.push(negociacao);
+    private negociacoes: Negociacao[] = [];
+
+    adiciona(negociacao: Negociacao): void {
+        this.negociacoes.push(negociacao);
     }
 
-    getNegociacoes(): Negociacao[]{
-        return [].concat(this._negociacoes);
+    paraArray(): Negociacao[] {
+        return [].concat(this.negociacoes);
     }
 }
