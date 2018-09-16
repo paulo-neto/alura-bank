@@ -54,11 +54,17 @@ export class NegociacaoController {
                 if(res.ok) return res;
                 throw new Error(res.statusText);
             })
-            .then(negociacoes => {
-                negociacoes.forEach(negociacao => 
+            .then(negociacoesParaImportar => {
+                const negociacoesJaImportadas = this.negociacoes.paraArray();
+                negociacoesParaImportar
+                    .filter(negociacao => 
+                        !negociacoesJaImportadas.some(jaImportada => 
+                            negociacao.ehIgual(jaImportada)))
+                    .forEach(negociacao => 
                     this.negociacoes.adiciona(negociacao));
+
                 this.negociacoesView.update(this.negociacoes);
-            }); 
+            });
     }
 
     private _ehDiaUtil(data: Date) {
