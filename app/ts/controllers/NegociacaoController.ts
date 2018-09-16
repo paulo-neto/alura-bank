@@ -64,6 +64,9 @@ export class NegociacaoController {
                     this.negociacoes.adiciona(negociacao));
 
                 this.negociacoesView.update(this.negociacoes);
+            })
+            .catch(err => {
+                this.mensagemView.update(err.message);
             });
     }
 
