@@ -1,6 +1,7 @@
 import {Negociacao} from './Negociacao';
+import { Imprimivel } from './Imprimivel';
 
-export class Negociacoes {
+export class Negociacoes extends Imprimivel{
 
     private negociacoes: Negociacao[] = [];
 
@@ -10,5 +11,10 @@ export class Negociacoes {
 
     paraArray(): Negociacao[] {
         return ([] as Negociacao[]).concat(this.negociacoes);
+    }
+
+    paraTexto(): void {
+        console.log('-- paraTexto --');
+        console.log(JSON.stringify(this.negociacoes));
     }
 }
